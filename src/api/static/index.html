@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#171719">
+  <title>Cloud SIEM · Security workspace</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23171719'/%3E%3Cpath d='M16 5l9 4v7c0 6-4 9-9 11-5-2-9-5-9-11V9l9-4z' fill='none' stroke='%234a8ad6' stroke-width='2'/%3E%3Cpath d='M11 16h3l2-4 2 8 2-4h2' fill='none' stroke='%23fff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/ui/fonts/fonts.css">
+  <link rel="stylesheet" href="/ui/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#view">Skip to content</a>
+
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-overview" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1"/><rect x="13.5" y="3.5" width="7" height="4" rx="1"/><rect x="13.5" y="10.5" width="7" height="10" rx="1"/><rect x="3.5" y="13.5" width="7" height="7" rx="1"/></symbol>
+    <symbol id="i-alerts" viewBox="0 0 24 24"><path d="M6 9a6 6 0 1 1 12 0c0 4 1.5 5.5 2 6H4c.5-.5 2-2 2-6Z"/><path d="M9.5 18.5a2.5 2.5 0 0 0 5 0"/></symbol>
+    <symbol id="i-events" viewBox="0 0 24 24"><path d="M3 12h3l2.5-6 4 12 2.5-6H21"/></symbol>
+    <symbol id="i-intel" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></symbol>
+    <symbol id="i-compliance" viewBox="0 0 24 24"><path d="M12 3l8 3.5V12c0 5-3.5 7.6-8 9-4.5-1.4-8-4-8-9V6.5L12 3Z"/><path d="m8.5 11.5 2.5 2.5 4.5-5"/></symbol>
+    <symbol id="i-attack" viewBox="0 0 24 24"><path d="M4 4h6M4 4v6M20 4h-6M20 4v6M4 20h6M4 20v-6M20 20h-6M20 20v-6"/><rect x="9" y="9" width="6" height="6" rx="1"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 6.3"/><path d="M20 4v7h-7"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3.5 6.5h17M3.5 12h17M3.5 17.5h17"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m5.5 5.5 13 13M18.5 5.5l-13 13"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-8 8"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 8-8M16 7l3 3M14 9l2.5 2.5"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-collect" viewBox="0 0 24 24"><path d="M12 3v11M7.5 9.5 12 14l4.5-4.5"/><path d="M4 17v2a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-2"/></symbol>
+  </svg>
+
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Workspace">
+      <button class="icon-btn sidebar-close" id="nav-close" type="button" aria-label="Close navigation">
+        <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+      <a class="brand" href="#/overview" aria-label="Cloud SIEM, overview">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 3l10 4.5V15c0 7-4.7 10.7-10 13-5.3-2.3-10-6-10-13V7.5L16 3Z" />
+          <path class="brand-pulse" d="M9.5 16h3.2l2-4.4 2.6 8.8 2-4.4h3.2" />
+        </svg>
+        <span class="brand-text">
+          <strong>Cloud SIEM</strong>
+          <small>Security workspace</small>
+        </span>
+      </a>
+
+      <div class="scope" id="scope">
+        <span class="scope-dot" id="scope-dot" aria-hidden="true"></span>
+        <span id="scope-env">connecting</span>
+        <span class="scope-version" id="scope-version"></span>
+      </div>
+
+      <nav class="nav" aria-label="Main">
+        <a class="nav-item" href="#/overview" data-screen="overview">
+          <svg class="icon" aria-hidden="true"><use href="#i-overview"/></svg>
+          <span class="nav-label">Overview</span>
+        </a>
+        <a class="nav-item" href="#/alerts" data-screen="alerts">
+          <svg class="icon" aria-hidden="true"><use href="#i-alerts"/></svg>
+          <span class="nav-label">Alerts</span>
+          <span class="nav-count" id="nav-alert-count" hidden></span>
+        </a>
+        <a class="nav-item" href="#/events" data-screen="events">
+          <svg class="icon" aria-hidden="true"><use href="#i-events"/></svg>
+          <span class="nav-label">Events</span>
+        </a>
+        <a class="nav-item" href="#/intel" data-screen="intel">
+          <svg class="icon" aria-hidden="true"><use href="#i-intel"/></svg>
+          <span class="nav-label">Threat intel</span>
+        </a>
+        <a class="nav-item" href="#/compliance" data-screen="compliance">
+          <svg class="icon" aria-hidden="true"><use href="#i-compliance"/></svg>
+          <span class="nav-label">Compliance</span>
+        </a>
+        <a class="nav-item" href="#/attack" data-screen="attack">
+          <svg class="icon" aria-hidden="true"><use href="#i-attack"/></svg>
+          <span class="nav-label">ATT&amp;CK</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-foot">
+        <button class="foot-btn" id="api-key-btn" type="button">
+          <svg class="icon" aria-hidden="true"><use href="#i-key"/></svg>
+          <span>API key</span>
+        </button>
+        <a class="foot-btn" href="/docs" target="_blank" rel="noreferrer">
+          <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>
+          <span>API docs</span>
+        </a>
+      </div>
+    </aside>
+
+    <div class="main">
+      <header class="mobilebar">
+        <button class="icon-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="sidebar" aria-label="Open navigation">
+          <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+        </button>
+        <span class="mobile-brand">Cloud SIEM</span>
+        <button class="icon-btn" id="mobile-refresh" type="button" aria-label="Refresh data">
+          <svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg>
+        </button>
+      </header>
+
+      <main class="view" id="view" tabindex="-1"></main>
+      <p class="visually-hidden" id="route-status" role="status"></p>
+    </div>
+  </div>
+
+  <div class="backdrop" id="backdrop" hidden></div>
+
+  <dialog class="dialog drawer" id="drawer" aria-labelledby="drawer-title">
+    <header class="dialog-head">
+      <div>
+        <h2 id="drawer-title">Event detail</h2>
+        <p class="muted small" id="drawer-sub"></p>
+      </div>
+      <button class="icon-btn" type="button" data-close-dialog="drawer" aria-label="Close detail">
+        <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </header>
+    <div class="dialog-body" id="drawer-body"></div>
+  </dialog>
+
+  <dialog class="dialog" id="key-dialog" aria-labelledby="key-title">
+    <form method="dialog" id="key-form">
+      <header class="dialog-head">
+        <div>
+          <h2 id="key-title">API key</h2>
+          <p class="muted small">Sent as the <code>X-API-Key</code> header. Stored in this browser only.</p>
+        </div>
+        <button class="icon-btn" type="button" data-close-dialog="key-dialog" aria-label="Close">
+          <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+        </button>
+      </header>
+      <div class="dialog-body">
+        <p class="notice" id="key-notice" hidden></p>
+        <label class="field">
+          <span>Key</span>
+          <input type="password" id="key-input" autocomplete="off" spellcheck="false" placeholder="Paste the key from API_KEY">
+        </label>
+        <div class="dialog-actions">
+          <button class="btn btn-ghost" type="button" id="key-clear">Clear saved key</button>
+          <button class="btn btn-primary" type="submit">Save key</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <noscript>
+    <div class="noscript">This dashboard needs JavaScript. The API is available at <a href="/docs">/docs</a>.</div>
+  </noscript>
+
+  <script src="/ui/app.js" defer></script>
+</body>
+</html>
